@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --verde:#2D6A4F;--verde-claro:#52B788;--verde-suave:#B7E4C7;--tierra:#8B5E3C;
+    --crema:#F9F5EF;--blanco:#ffffff;--texto:#1C1C1C;--texto-suave:#555;
+    --acento:#E76F51;
+  }
+  body{font-family:'DM Sans',sans-serif;color:var(--texto);background:var(--crema);overflow-x:hidden}
+  
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(249,245,239,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(45,106,79,0.1)}
+  .logo{font-family:'Lora',serif;font-size:1.2rem;color:var(--verde);font-weight:600;letter-spacing:-0.5px}
+  .logo span{color:var(--acento)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--texto-suave);font-size:0.9rem;font-weight:400;transition:color 0.2s}
+  .nav-links a:hover{color:var(--verde)}
+  .nav-cta{background:var(--verde);color:white!important;padding:0.5rem 1.25rem;border-radius:100px;font-weight:500!important;transition:background 0.2s!important}
+  .nav-cta:hover{background:var(--verde-claro)!important;color:white!important}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:0;background:var(--verde);}
+  .hero-left{display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem;background:var(--verde)}
+  .hero-eyebrow{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--verde-suave);margin-bottom:1.5rem;font-weight:500}
+  .hero-titulo{font-family:'Lora',serif;font-size:3.2rem;line-height:1.15;color:white;margin-bottom:1.5rem;font-weight:600}
+  .hero-titulo em{font-style:italic;color:var(--verde-suave)}
+  .hero-subtitulo{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,0.75);margin-bottom:2.5rem;max-width:420px;font-weight:300}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--acento);color:white;padding:0.9rem 2rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:0.95rem;transition:transform 0.2s,box-shadow 0.2s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(231,111,81,0.35)}
+  .btn-secondary{border:1.5px solid rgba(255,255,255,0.4);color:white;padding:0.9rem 2rem;border-radius:100px;text-decoration:none;font-weight:400;font-size:0.95rem;transition:background 0.2s}
+  .btn-secondary:hover{background:rgba(255,255,255,0.1)}
+  .hero-right{position:relative;overflow:hidden;background:var(--verde-claro)}
+  .hero-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);display:flex;align-items:center;justify-content:center;padding:4rem 3rem;padding-top:7rem}
+  .hero-card{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.25);border-radius:1.5rem;padding:2.5rem;max-width:360px;width:100%}
+  .hero-card-quote{font-family:'Lora',serif;font-size:1.3rem;line-height:1.6;color:white;font-style:italic;margin-bottom:1.5rem}
+  .hero-card-author{font-size:0.85rem;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:0.75rem}
+  .avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:500;color:white}
+  .stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.2)}
+  .stat-item{text-align:center}
+  .stat-num{font-family:'Lora',serif;font-size:1.8rem;color:white;font-weight:600;display:block}
+  .stat-label{font-size:0.75rem;color:rgba(255,255,255,0.65);margin-top:0.25rem}
+
+  /* SECTIONS */
+  section{padding:5rem 2rem}
+  .container{max-width:1100px;margin:0 auto}
+  .section-tag{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--verde);font-weight:500;margin-bottom:1rem;display:block}
+  .section-titulo{font-family:'Lora',serif;font-size:2.2rem;line-height:1.2;color:var(--texto);margin-bottom:1.5rem;font-weight:600;max-width:600px}
+  .section-subtitulo{font-size:1rem;line-height:1.9;color:var(--texto-suave);max-width:580px;font-weight:300}
+
+  /* QUIÉNES SOMOS */
+  .quienes{background:white}
+  .quienes-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem}
+  .valor-list{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+  .valor-item{display:flex;gap:1rem;align-items:flex-start}
+  .valor-dot{width:10px;height:10px;border-radius:50%;background:var(--acento);flex-shrink:0;margin-top:6px}
+  .valor-texto h4{font-size:0.95rem;font-weight:500;color:var(--texto);margin-bottom:0.25rem}
+  .valor-texto p{font-size:0.88rem;line-height:1.7;color:var(--texto-suave)}
+  .imagen-placeholder{background:linear-gradient(135deg,var(--verde-suave),var(--verde-claro));border-radius:1.5rem;min-height:420px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem}
+  .imagen-overlay{background:rgba(45,106,79,0.85);border-radius:1rem;padding:1.5rem;color:white}
+  .imagen-overlay p{font-family:'Lora',serif;font-style:italic;font-size:1rem;line-height:1.6;margin-bottom:0.5rem}
+  .imagen-overlay span{font-size:0.78rem;opacity:0.75}
+
+  /* QUÉ HACEMOS */
+  .hacemos{background:var(--crema)}
+  .hacemos-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+  .hacemos-card{background:white;border-radius:1.25rem;padding:2rem;border:1px solid rgba(45,106,79,0.08);transition:transform 0.2s,box-shadow 0.2s}
+  .hacemos-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(45,106,79,0.1)}
+  .card-icon{width:48px;height:48px;border-radius:12px;background:var(--verde-suave);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.3rem}
+  .hacemos-card h3{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;margin-bottom:0.75rem;color:var(--texto)}
+  .hacemos-card p{font-size:0.88rem;line-height:1.8;color:var(--texto-suave)}
+  .card-link{display:inline-flex;align-items:center;gap:0.4rem;margin-top:1rem;font-size:0.82rem;color:var(--verde);font-weight:500;text-decoration:none}
+
+  /* IMPACTO */
+  .impacto{background:var(--verde);color:white;text-align:center}
+  .impacto .section-titulo{color:white;margin:0 auto 1rem}
+  .impacto .section-subtitulo{color:rgba(255,255,255,0.7);margin:0 auto 3rem}
+  .impacto .section-tag{color:var(--verde-suave)}
+  .impacto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:1rem}
+  .impacto-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:1.25rem;padding:2rem 1.25rem}
+  .impacto-num{font-family:'Lora',serif;font-size:2.8rem;font-weight:600;color:var(--verde-suave);display:block;margin-bottom:0.5rem}
+  .impacto-label{font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.5}
+
+  /* CÓMO COLABORAR */
+  .colaborar{background:white}
+  .colaborar-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+  .colab-card{border-radius:1.25rem;padding:2.5rem;position:relative;overflow:hidden}
+  .colab-donar{background:var(--acento);color:white}
+  .colab-voluntario{background:var(--verde);color:white}
+  .colab-card h3{font-family:'Lora',serif;font-size:1.5rem;margin-bottom:1rem;font-weight:600}
+  .colab-card p{font-size:0.92rem;line-height:1.8;opacity:0.85;margin-bottom:2rem}
+  .colab-card .btn-blanco{background:white;border-radius:100px;padding:0.85rem 2rem;font-weight:500;font-size:0.9rem;text-decoration:none;display:inline-block;transition:transform 0.2s}
+  .colab-donar .btn-blanco{color:var(--acento)}
+  .colab-voluntario .btn-blanco{color:var(--verde)}
+  .colab-card .btn-blanco:hover{transform:translateY(-2px)}
+  .colab-deco{position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;border-radius:50%;opacity:0.1;background:white}
+  .colab-deco2{position:absolute;right:50px;bottom:40px;width:60px;height:60px;border-radius:50%;opacity:0.08;background:white}
+  .otras-formas{background:var(--crema);border-radius:1.25rem;padding:2rem;border:1px solid rgba(45,106,79,0.1)}
+  .otras-formas h4{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;margin-bottom:1rem;color:var(--texto)}
+  .formas-lista{display:flex;flex-direction:column;gap:0.75rem}
+  .forma-item{display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:var(--texto-suave)}
+  .forma-check{width:20px;height:20px;border-radius:50%;background:var(--verde-suave);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.7rem;color:var(--verde);font-weight:700}
+
+  /* FOOTER */
+  footer{background:#1C1C1C;color:rgba(255,255,255,0.6);padding:3rem 2rem;text-align:center}
+  footer .logo{color:var(--verde-claro);display:block;font-size:1.1rem;margin-bottom:0.75rem}
+  footer p{font-size:0.82rem;line-height:1.8}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .hero-left>*{animation:fadeUp 0.7s ease both}
+  .hero-eyebrow{animation-delay:0.1s}
+  .hero-titulo{animation-delay:0.25s}
+  .hero-subtitulo{animation-delay:0.4s}
+  .hero-btns{animation-delay:0.55s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">raíces <span>&</span> vínculos</div>
+  <ul class="nav-links">
+    <li><a href="#quienes">Quiénes somos</a></li>
+    <li><a href="#hacemos">Qué hacemos</a></li>
+    <li><a href="#impacto">Impacto</a></li>
+    <li><a href="#colaborar" class="nav-cta">Colaborar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Acompañamiento comunitario</p>
+    <h1 class="hero-titulo">Cada persona <em>merece</em> sentirse parte de algo</h1>
+    <p class="hero-subtitulo">Trabajamos junto a las comunidades para construir lazos de confianza, cuidado mutuo y pertenencia. No desde afuera, sino desde adentro.</p>
+    <div class="hero-btns">
+      <a href="#colaborar" class="btn-primary">Sumarte al cambio</a>
+      <a href="#hacemos" class="btn-secondary">Conocer nuestro trabajo</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern">
+      <div class="hero-card">
+        <p class="hero-card-quote">"Creí que estaba sola. Acá encontré una comunidad que me sostuvo cuando más lo necesitaba."</p>
+        <div class="hero-card-author">
+          <div class="avatar">ML</div>
+          <div>
+            <div style="color:white;font-size:0.85rem;font-weight:500">María Laura</div>
+            <div>Participante del programa, 2024</div>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-num">850+</span>
+            <span class="stat-label">Personas acompañadas</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">12</span>
+            <span class="stat-label">Barrios activos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">8</span>
+            <span class="stat-label">Años de trabajo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="quienes" id="quienes">
+  <div class="container">
+    <span class="section-tag">Quiénes somos</span>
+    <h2 class="section-titulo">Somos un equipo que cree en el poder de la comunidad</h2>
+    <div class="quienes-grid">
+      <div>
+        <p class="section-subtitulo">Raíces & Vínculos nació en 2016 de una convicción simple: las personas no deberían atravesar los momentos difíciles en soledad. Somos un equipo de profesionales y voluntarios comprometidos con el acompañamiento humano, que trabajamos en los bordes donde el Estado no siempre llega.</p>
+        <p class="section-subtitulo" style="margin-top:1rem">No venimos a resolver los problemas de otros. Venimos a caminar al lado, a escuchar, y a ayudar a encontrar los propios recursos.</p>
+        <div class="valor-list">
+          <div class="valor-item">
+            <div class="valor-dot"></div>
+            <div class="valor-texto">
+              <h4>Presencia sin juicio</h4>
+              <p>Acompañamos sin condicionar, desde la escucha genuina y el respeto profundo por cada historia de vida.</p>
+            </div>
+          </div>
+          <div class="valor-item">
+            <div class="valor-dot"></div>
+            <div class="valor-texto">
+              <h4>Acción con raíces</h4>
+              <p>Cada programa surge del diálogo con las propias comunidades. Nada se hace para ellas sin construirse con ellas.</p>
+            </div>
+          </div>
+          <div class="valor-item">
+            <div class="valor-dot"></div>
+            <div class="valor-texto">
+              <h4>Vínculo como herramienta</h4>
+              <p>Creemos que el lazo humano es la intervención más poderosa que existe. Todo lo demás viene después.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="imagen-placeholder">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0.15">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="40" r="22" fill="#2D6A4F"/>
+            <circle cx="30" cy="75" r="16" fill="#2D6A4F"/>
+            <circle cx="90" cy="75" r="16" fill="#2D6A4F"/>
+            <circle cx="60" cy="85" r="16" fill="#2D6A4F"/>
+            <line x1="60" y1="62" x2="30" y2="75" stroke="#2D6A4F" stroke-width="3"/>
+            <line x1="60" y1="62" x2="90" y2="75" stroke="#2D6A4F" stroke-width="3"/>
+            <line x1="60" y1="62" x2="60" y2="85" stroke="#2D6A4F" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="imagen-overlay">
+          <p>"No llegamos con respuestas. Llegamos a construirlas juntos."</p>
+          <span>— Equipo de Raíces & Vínculos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ HACEMOS -->
+<section class="hacemos" id="hacemos">
+  <div class="container">
+    <span class="section-tag">Qué hacemos</span>
+    <h2 class="section-titulo">Programas que nacen de la escucha</h2>
+    <p class="section-subtitulo">Cada línea de trabajo surge de lo que las comunidades nos dicen que necesitan. Trabajamos en tres ejes complementarios.</p>
+    <div class="hacemos-cards">
+      <div class="hacemos-card">
+        <div class="card-icon">🤝</div>
+        <h3>Acompañamiento individual</h3>
+        <p>Espacios de escucha y contención para personas que atraviesan situaciones de vulnerabilidad, soledad o crisis. Un vínculo sostenido en el tiempo, no una intervención puntual.</p>
+        <a href="#colaborar" class="card-link">Saber más →</a>
+      </div>
+      <div class="hacemos-card">
+        <div class="card-icon">🌿</div>
+        <h3>Talleres comunitarios</h3>
+        <p>Encuentros grupales orientados al fortalecimiento de vínculos, habilidades socioemocionales y participación activa. Porque el bienestar también se construye en colectivo.</p>
+        <a href="#colaborar" class="card-link">Saber más →</a>
+      </div>
+      <div class="hacemos-card">
+        <div class="card-icon">🏘️</div>
+        <h3>Redes barriales</h3>
+        <p>Articulamos con organizaciones, centros de salud, escuelas y vecinos para construir redes de cuidado que perduren más allá de nuestra presencia.</p>
+        <a href="#colaborar" class="card-link">Saber más →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACTO -->
+<section class="impacto" id="impacto">
+  <div class="container">
+    <span class="section-tag">Nuestro impacto</span>
+    <h2 class="section-titulo" style="text-align:center">Números que son personas</h2>
+    <p class="section-subtitulo" style="text-align:center">Detrás de cada dato hay una historia, un nombre, una vida que se transformó.</p>
+    <div class="impacto-grid">
+      <div class="impacto-card">
+        <span class="impacto-num">850+</span>
+        <span class="impacto-label">Personas acompañadas desde 2016</span>
+      </div>
+      <div class="impacto-card">
+        <span class="impacto-num">12</span>
+        <span class="impacto-label">Barrios donde estamos presentes</span>
+      </div>
+      <div class="impacto-card">
+        <span class="impacto-num">4.800+</span>
+        <span class="impacto-label">Horas de acompañamiento al año</span>
+      </div>
+      <div class="impacto-card">
+        <span class="impacto-num">93%</span>
+        <span class="impacto-label">Participantes que recomendarían el programa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO COLABORAR -->
+<section class="colaborar" id="colaborar">
+  <div class="container">
+    <span class="section-tag">Cómo colaborar</span>
+    <h2 class="section-titulo">Tu ayuda llega directo a las personas</h2>
+    <p class="section-subtitulo">No hace falta tener tiempo ni dinero al mismo tiempo. Elegí la forma que más se adapte a vos.</p>
+    <div class="colaborar-grid">
+      <div class="colab-card colab-donar">
+        <div class="colab-deco"></div><div class="colab-deco2"></div>
+        <h3>Hacé una donación</h3>
+        <p>Con tu aporte económico sostenemos los programas de acompañamiento, los talleres y el trabajo de nuestro equipo en el territorio. Cada peso se convierte en presencia.</p>
+        <a href="#" class="btn-blanco">Donar ahora</a>
+      </div>
+      <div class="colab-card colab-voluntario">
+        <div class="colab-deco"></div><div class="colab-deco2"></div>
+        <h3>Sumarte como voluntario/a</h3>
+        <p>Si tenés ganas de poner en juego tu tiempo y tu energía, buscamos personas comprometidas para distintos roles: acompañantes, facilitadores, apoyo logístico y más.</p>
+        <a href="#" class="btn-blanco">Quiero ser voluntario/a</a>
+      </div>
+    </div>
+    <div class="otras-formas" style="margin-top:1.5rem">
+      <h4>Otras formas de apoyar</h4>
+      <div class="formas-lista">
+        <div class="forma-item"><div class="forma-check">✓</div><span>Compartir nuestro trabajo en redes sociales</span></div>
+        <div class="forma-item"><div class="forma-check">✓</div><span>Conectarnos con tu empresa para alianzas o donaciones corporativas</span></div>
+        <div class="forma-item"><div class="forma-check">✓</div><span>Prestar espacios físicos para talleres y encuentros comunitarios</span></div>
+        <div class="forma-item"><div class="forma-check">✓</div><span>Sumarte como organización aliada o derivar casos a nuestros programas</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="logo">raíces & vínculos</span>
+  <p>Organización sin fines de lucro · Acompañamiento comunitario desde 2016</p>
+  <p style="margin-top:0.5rem">contacto@raicesyvinculos.org.ar · Buenos Aires, Argentina</p>
+</footer>
+
+</body>
+</html>
